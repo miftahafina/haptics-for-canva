@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Canva Snap Haptics — Prototype",
+  "version": "0.2.0",
+  "description": "Local macOS trackpad haptics and DOM diagnostics for Canva snap indicators.",
+  "permissions": ["nativeMessaging", "storage"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html" },
+  "content_scripts": [{
+    "matches": ["https://www.canva.com/*", "https://canva.com/*"],
+    "js": ["geometry.js", "content.js"],
+    "run_at": "document_idle"
+  }]
+}

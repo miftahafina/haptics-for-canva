@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Canva Snap Haptics</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>Canva Snap Haptics</h1>
+  <p class="muted">Prototipe lokal · Force Touch trackpad</p>
+  <section>
+    <h2>1. Tes helper macOS</h2>
+    <p>Letakkan jari di trackpad tanpa menekan saat tes. Respons sukses berarti perintah diterima, bukan bukti ketukan terasa.</p>
+    <button id="test">Tes ketukan</button>
+    <button id="ping" class="secondary">Cek koneksi</button>
+    <p>ID extension untuk instalasi helper:</p>
+    <code id="extension-id"></code>
+  </section>
+  <section>
+    <h2>2. Temukan indikator Canva</h2>
+    <p>Tampilkan safe area dan pilih satu objek. Mulai diagnosis, tutup popup, lalu drag/resize objek sampai tepinya menyentuh kotak safe area. Tunggu 15 detik sebelum mengambil laporan. Kotak statis juga dipindai.</p>
+    <button id="diagnose">Rekam diagnosis 15 detik</button>
+    <button id="report" class="secondary">Tampilkan laporan</button>
+    <textarea id="report-output" aria-label="Laporan diagnosis" readonly hidden></textarea>
+  </section>
+  <section>
+    <h2>3. Aktifkan snap eksperimental</h2>
+    <p>Belum otomatis: perlu selector CSS yang hanya terlihat saat snap. Laporan menyediakan kandidat, bukan selector yang sudah terverifikasi.</p>
+    <label for="selector">Selector indikator snap</label>
+    <input id="selector" placeholder="Isi setelah pemeriksaan DOM" spellcheck="false">
+    <details>
+      <summary>Safe area: sentuhan tepi objek (eksperimental)</summary>
+      <p>Perlu dua selector terverifikasi: masing-masing tepat satu kotak safe area dan satu batas objek terpilih yang terlihat. Kosongkan keduanya untuk menonaktifkan.</p>
+      <label for="safe-area-selector">Selector kotak safe area</label>
+      <input id="safe-area-selector" placeholder="Belum diketahui — ambil diagnosis baru" spellcheck="false">
+      <label for="object-selector">Selector batas objek terpilih</label>
+      <input id="object-selector" placeholder="Bukan semua objek di desain" spellcheck="false">
+      <p>Toleransi 1 px layar; lepas setelah menjauh >3 px. Objek berotasi memakai kotak pembatas, belum tepi bentuk sebenarnya.</p>
+    </details>
+    <label class="toggle"><input id="enabled" type="checkbox"> Aktifkan haptic saat drag</label>
+    <button id="save">Simpan</button>
+  </section>
+  <p id="status" role="status" aria-live="polite"></p>
+  <script src="popup.js"></script>
+</body>
+</html>
